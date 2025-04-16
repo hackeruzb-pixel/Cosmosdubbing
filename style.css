@@ -568,6 +568,7 @@ a {
 }
 
 .admin-form {
+    width: 350px;
     margin-top: 20px;
     margin-left: 12px;
     margin-bottom: 20px;
@@ -583,6 +584,17 @@ a {
 
 .search-section {
     width: 350px;
-    margin-left: 20px;
+    margin-left: 30px;
     margin-top: -2px;
+}
+
+.dfg{
+    width: 320px;
+    height: 35px;
+}
+
+.dfgh{
+    margin-top: 15px;
+    width: 320px;
+    height: 35px;
 }
