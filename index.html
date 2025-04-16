@@ -2,29 +2,85 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anime Platforma</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Anime Platforma</h1>
+    <h1 class="sdf">Anime Platforma</h1>
     <div class="profile">
-      <a href="admin-panal.html">Admin Paneli</a>
+      <a href="admin-panal.html">Profil</a>
     </div>
   </header>
 
   <section class="search-section">
-    <input type="text" id="searchInput" placeholder="Anime nomini yozing..." onkeyup="searchVideos()">
+    <input type="text" id="searchInput" autocomplete="off" placeholder="Anime qidiring..." onkeyup="searchVideos()">
   </section>
 
-  <section class="video-list" id="video-list"></section>
-
-  <section class="recommended-anime">
-    <h2>🎯 Tavsiya etilgan anime</h2>
-    <div id="recommendedAnimeContainer" class="video-grid"></div>
+  <section class="video-list">
+    <h2 class="wer">Tavsiya etilgan anime</h2>
+    <div id="videoContainer"></div>
   </section>
 
-  <script src="script.js"></script>
+ 
+
+  <script>
+    window.onload = function () {
+      displayVideos();
+      displayRecommendedAnime();
+    };
+
+    function displayVideos() {
+      const videoContainer = document.getElementById("videoContainer");
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      videoContainer.innerHTML = "";
+
+      videos.forEach(video => {
+        const el = document.createElement("div");
+        el.classList.add("video-item");
+        el.innerHTML = `
+          <h3>${video.title}</h3>
+          <a href="${video.link}" target="_blank">Ko‘rish</a>
+        `;
+        videoContainer.appendChild(el);
+      });
+    }
+
+    function displayRecommendedAnime() {
+      const container = document.getElementById("recommendedAnimeContainer");
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      container.innerHTML = "";
+
+      videos.forEach(video => {
+        const el = document.createElement("div");
+        el.classList.add("anime-item");
+        el.innerHTML = `
+          <h3>${video.title}</h3>
+          <iframe src="${video.link}" width="100%" height="250" frameborder="0" allowfullscreen></iframe>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    function searchVideos() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const videoContainer = document.getElementById("videoContainer");
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+
+      videoContainer.innerHTML = "";
+
+      const filtered = videos.filter(v => v.title.toLowerCase().includes(input));
+      filtered.forEach(video => {
+        const el = document.createElement("div");
+        el.classList.add("video-item");
+        el.innerHTML = `
+          <h3>${video.title}</h3>
+          <a href="${video.link}" target="_blank">Ko‘rish</a>
+        `;
+        videoContainer.appendChild(el);
+      });
+    }
+  </script>
 </body>
 </html>

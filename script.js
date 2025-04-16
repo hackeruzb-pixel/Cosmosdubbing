@@ -215,3 +215,11 @@ window.onload = function () {
     });
   }
   
+  div.innerHTML = `
+  <h3>${video.title}</h3>
+  <!-- <iframe src="${video.link}" width="100%" height="200" frameborder="0"></iframe> -->
+  <div class="btn-group">
+    <button onclick="editVideo(${index})">✏️ Edit</button>
+    <button onclick="deleteVideo(${index})">🗑️ O‘chirish</button>
+  </div>
+`;

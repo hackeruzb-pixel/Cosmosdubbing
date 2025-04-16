@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <h1>Admin Paneli</h1>
+    <h1 class="asd">Admin Paneli</h1>
     <a href="index.html" class="back-button">🏠 Bosh sahifa</a>
   </header>
 
@@ -31,7 +31,6 @@
         div.className = "video-item";
         div.innerHTML = `
           <h3>${video.title}</h3>
-          <iframe src="${video.link}" width="100%" height="200" frameborder="0"></iframe>
           <div class="btn-group">
             <button onclick="editVideo(${index})">✏️ Edit</button>
             <button onclick="deleteVideo(${index})">🗑️ O‘chirish</button>
@@ -75,10 +74,10 @@
   </script>
 
   <script>
-  if (sessionStorage.getItem("auth") !== "true") {
-    window.location.href = "admin-login.html";
-  }
-</script>
+    if (sessionStorage.getItem("auth") !== "true") {
+      window.location.href = "admin-login.html";
+    }
+  </script>
 
 </body>
 </html>

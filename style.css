@@ -221,11 +221,12 @@ header {
 .profile a {
     color: white;
     background: #27ae60;
-    padding: 8px 12px;
+    padding: 4px 8px;
     text-decoration: none;
     border-radius: 8px;
     transition: 0.3s;
 }
+
 
 .profile a:hover {
     background: #2ecc71;
@@ -388,128 +389,200 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-  }
-  
-  header {
+}
+
+header {
     background-color: #4CAF50;
     color: white;
     padding: 10px;
     text-align: center;
-  }
-  
-  .profile a {
+}
+
+.profile a {
     color: white;
     font-size: 20px;
     text-decoration: none;
-  }
-  
-  .profile a:hover {
+}
+
+.profile a:hover {
     text-decoration: underline;
-  }
-  
-  .search-section {
+}
+
+.search-section {
     padding: 20px;
     text-align: center;
-  }
-  
-  .search-section input {
+}
+
+.search-section input {
     padding: 10px;
     width: 80%;
     max-width: 500px;
     font-size: 16px;
-  }
-  
-  .video-list {
+}
+
+.video-list {
     padding: 20px;
-  }
-  
-  .video-item {
+}
+
+.video-item {
     margin-bottom: 20px;
-  }
-  
-  .video-item h3 {
+}
+
+.video-item h3 {
     font-size: 18px;
-  }
-  
-  .video-grid {
+}
+
+.video-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-  }
-  
-  .anime-item {
+}
+
+.anime-item {
     width: 300px;
     text-align: center;
-  }
-  
-  .anime-item iframe {
+}
+
+.anime-item iframe {
     width: 100%;
     height: 200px;
-  }
-  
-  button {
+}
+
+button {
     padding: 10px 20px;
     margin: 5px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
+}
 
-  @media screen and (max-width: 320px) {
-    header {
-      padding: 10px;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    header h1 {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-  
-    .profile a {
-      font-size: 14px;
-      padding: 6px 10px;
-      width: 100%;
-      text-align: center;
-    }
-  
-    .search-section {
-      padding: 10px;
-    }
-  
-    .search-section input {
-      font-size: 14px;
-      padding: 8px;
-      width: 95%;
-    }
-  
-    .video-item,
-    .anime-item {
-      padding: 10px;
-    }
-  
-    .video-item h3,
-    .anime-item h3 {
-      font-size: 16px;
-    }
-  
-    iframe {
-      height: 180px;
-    }
-  
-    .video-grid,
-    #video-list,
-    #recommendedAnimeContainer {
-      padding: 10px;
-      gap: 15px;
-    }
-  }
-  
-  
+button:hover {
+    background-color: #45a049;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-panel {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2,
+h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#image-preview {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#image-preview img {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+}
+
+.recommended-anime {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#anime-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.anime-item {
+    margin: 10px;
+    text-align: center;
+}
+
+.anime-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+.back-button {
+    color: #27ae60;
+    margin-left: -50px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.asd {
+    font-size: small;
+}
+
+.admin-form {
+    margin-top: 20px;
+    margin-left: 12px;
+    margin-bottom: 20px;
+}
+
+.sdf {
+    font-size: small;
+}
+
+.wer {
+    font-size: small;
+}
+
+.search-section {
+    width: 300px;
+    margin-left: -10px;
+    margin-top: -3px;
+}
