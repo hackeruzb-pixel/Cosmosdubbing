@@ -27,35 +27,52 @@
     function displayVideos() {
       const videoContainer = document.getElementById("videoContainer");
       const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      const views = JSON.parse(localStorage.getItem("views")) || {};
+
       videoContainer.innerHTML = "";
 
-      videos.forEach(video => {
+      videos.forEach((video, index) => {
+        const viewCount = views[video.title] || 0;
+
         const el = document.createElement("div");
         el.classList.add("video-item");
         el.innerHTML = `
-          <img src="${video.img}" alt="${video.title}" width="100%">
+         <img src="${video.img || 'default.jpg'}" alt="${video.title}" width="275 height="200">
           <h3>${video.title}</h3>
-          <a href="${video.link}" target="_blank">Ko‘rish</a>
+          <p>Ko‘rishlar: <span id="views-${index}">${viewCount}</span></p>
+          <a href="${video.link}" target="_blank" onclick="increaseView('${video.title}', ${index})">Ko‘rish</a>
         `;
         videoContainer.appendChild(el);
       });
+    }
+
+    function increaseView(title, index) {
+      let views = JSON.parse(localStorage.getItem("views")) || {};
+      views[title] = (views[title] || 0) + 1;
+      localStorage.setItem("views", JSON.stringify(views));
+      document.getElementById(`views-${index}`).innerText = views[title];
     }
 
     function searchVideos() {
       const input = document.getElementById("searchInput").value.toLowerCase();
       const videoContainer = document.getElementById("videoContainer");
       const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      const views = JSON.parse(localStorage.getItem("views")) || {};
 
       videoContainer.innerHTML = "";
 
       const filtered = videos.filter(v => v.title.toLowerCase().includes(input));
-      filtered.forEach(video => {
+    
+  filtered.forEach((video, index) => {
+        const viewCount = views[video.title] || 0;
+
         const el = document.createElement("div");
         el.classList.add("video-item");
         el.innerHTML = `
           <img src="${video.img}" alt="${video.title}" width="100%">
           <h3>${video.title}</h3>
-          <a href="${video.link}" target="_blank">Ko‘rish</a>
+          <p>Ko‘rishlar: <span id="views-${index}">${viewCount}</span></p>
+          <a href="${video.link}" target="_blank" onclick="increaseView('${video.title}', ${index})">Ko‘rish</a>
         `;
         videoContainer.appendChild(el);
       });
@@ -65,7 +82,6 @@
   </script>
 </body>
 </html> -->
-
 
 <!DOCTYPE html>
 <html lang="uz">
@@ -106,7 +122,7 @@
         const el = document.createElement("div");
         el.classList.add("video-item");
         el.innerHTML = `
-          <img src="${video.img}" alt="${video.title}" width="275 height="200">
+          <img src="${video.img || 'default.jpg'}" alt="${video.title}" width="275" height="200">
           <h3>${video.title}</h3>
           <p>Ko‘rishlar: <span id="views-${index}">${viewCount}</span></p>
           <a href="${video.link}" target="_blank" onclick="increaseView('${video.title}', ${index})">Ko‘rish</a>

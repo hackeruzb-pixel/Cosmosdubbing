@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="uz">
 <head>
   <meta charset="UTF-8" />
@@ -77,6 +77,102 @@
       }
     }
 
+    if (sessionStorage.getItem("auth") !== "true") {
+      window.location.href = "admin-login.html";
+    }
+
+    window.onload = loadVideos;
+  </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Paneli</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1 class="asd">Admin Paneli</h1>
+    <a href="index.html" class="back-button">🏠 Bosh sahifa</a>
+  </header>
+
+  <section class="admin-form">
+    <input type="text" id="title" placeholder="Anime nomi" />
+    <input type="text" id="link" placeholder="Telegram video linki" />
+    <input type="text" id="img" placeholder="Anime rasmi (poster) URL" />
+    <button onclick="addVideo()">Qo‘shish</button>
+  </section>
+
+  <section class="admin-videos" id="adminVideoList"></section>
+
+  <script>
+    // Videolarni yuklash va ko'rsatish
+    function loadVideos() {
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      const container = document.getElementById("adminVideoList");
+      container.innerHTML = "";
+
+      videos.forEach((video, index) => {
+        const div = document.createElement("div");
+        div.className = "video-item";
+        div.innerHTML = `
+          <img src="${video.img}" alt="${video.title}" width="100%">
+          <h3>${video.title}</h3>
+          <p>Ko‘rishlar soni: ${video.views || 0}</p>
+          <div class="btn-group">
+            <button onclick="editVideo(${index})">✏️ Tahrirlash</button>
+            <button onclick="deleteVideo(${index})">🗑 O‘chirish</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Yangi video qo‘shish
+    function addVideo() {
+      const title = document.getElementById("title").value.trim();
+      const link = document.getElementById("link").value.trim();
+      const img = document.getElementById("img").value.trim();
+
+      if (!title || !link || !img) return alert("Barcha maydonlarni to‘ldiring!");
+
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      videos.push({ title, link, img, views: 0 });
+      localStorage.setItem("videos", JSON.stringify(videos));
+
+      // Maydonlarni tozalash
+      document.getElementById("title").value = "";
+      document.getElementById("link").value = "";
+      document.getElementById("img").value = "";
+
+      loadVideos();
+    }
+
+    // Video o‘chirish
+    function deleteVideo(index) {
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      videos.splice(index, 1);
+      localStorage.setItem("videos", JSON.stringify(videos));
+      loadVideos();
+    }
+
+    // Video tahrirlash
+    function editVideo(index) {
+      const videos = JSON.parse(localStorage.getItem("videos")) || [];
+      const updatedTitle = prompt("Yangi nom:", videos[index].title);
+      if (updatedTitle) {
+        videos[index].title = updatedTitle;
+        localStorage.setItem("videos", JSON.stringify(videos));
+        loadVideos();
+      }
+    }
+
+    // Foydalanuvchi autentifikatsiyasini tekshirish
     if (sessionStorage.getItem("auth") !== "true") {
       window.location.href = "admin-login.html";
     }
