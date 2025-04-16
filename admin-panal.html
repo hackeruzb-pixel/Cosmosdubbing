@@ -13,8 +13,9 @@
   </header>
 
   <section class="admin-form">
-    <input type="text" id="title" placeholder="Anime nomi" class="dfg" />
-    <input type="text" id="link" placeholder="Telegram video linki" class="dfgh" />
+    <input type="text" id="title" placeholder="Anime nomi" />
+    <input type="text" id="link" placeholder="Telegram video linki" />
+    <input type="text" id="img" placeholder="Anime rasmi (poster) URL" width="390" height="200" />
     <button onclick="addVideo()">Qo‘shish</button>
   </section>
 
@@ -30,10 +31,11 @@
         const div = document.createElement("div");
         div.className = "video-item";
         div.innerHTML = `
+          <img src="${video.img}" alt="${video.title}" width="100%">
           <h3>${video.title}</h3>
           <div class="btn-group">
             <button onclick="editVideo(${index})">✏️ Edit</button>
-            <button onclick="deleteVideo(${index})">🗑️ O‘chirish</button>
+            <button onclick="deleteVideo(${index})">🗑 O‘chirish</button>
           </div>
         `;
         container.appendChild(div);
@@ -43,13 +45,18 @@
     function addVideo() {
       const title = document.getElementById("title").value.trim();
       const link = document.getElementById("link").value.trim();
-      if (!title || !link) return alert("Maydonlar to‘ldirilishi shart!");
+      const img = document.getElementById("img").value.trim();
+
+      if (!title || !link || !img) return alert("Barcha maydonlarni to‘ldiring!");
 
       const videos = JSON.parse(localStorage.getItem("videos")) || [];
-      videos.push({ title, link });
+      videos.push({ title, link, img });
       localStorage.setItem("videos", JSON.stringify(videos));
+
       document.getElementById("title").value = "";
       document.getElementById("link").value = "";
+      document.getElementById("img").value = "";
+
       loadVideos();
     }
 
@@ -70,14 +77,11 @@
       }
     }
 
-    window.onload = loadVideos;
-  </script>
-
-  <script>
     if (sessionStorage.getItem("auth") !== "true") {
       window.location.href = "admin-login.html";
     }
-  </script>
 
+    window.onload = loadVideos;
+  </script>
 </body>
 </html>
