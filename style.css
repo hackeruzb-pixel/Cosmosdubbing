@@ -578,11 +578,11 @@ a {
 }
 
 .wer {
-    font-size: small;
+    font-size: larger;
 }
 
 .search-section {
-    width: 300px;
+    width: 350px;
     margin-left: -10px;
     margin-top: -3px;
 }
