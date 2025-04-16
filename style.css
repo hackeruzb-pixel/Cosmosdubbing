@@ -1,0 +1,463 @@
+/* Global stil */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Header stil */
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Admin Paneli */
+.add-video-section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.add-video-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.add-video-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-video-section label {
+    margin-bottom: 5px;
+}
+
+.add-video-section input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-video-section button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-video-section button:hover {
+    background-color: #45a049;
+}
+
+/* Videolar ro'yxati */
+.video-list,
+.recommended-anime {
+    margin: 20px;
+}
+
+h2 {
+    font-size: 26px;
+    color: #333;
+}
+
+/* Video element */
+.video-item,
+.anime-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.video-item h3,
+.anime-item h3 {
+    font-size: 22px;
+}
+
+.video-item a,
+.anime-item a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.video-item a:hover,
+.anime-item a:hover {
+    text-decoration: underline;
+}
+
+/* Qidirish bo'limi */
+.search-section {
+    margin: 20px;
+    text-align: center;
+}
+
+.search-section input {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Profil bo'limi */
+.profile-section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.profile-info {
+    font-size: 18px;
+}
+
+.profile-info p {
+    margin: 10px 0;
+}
+
+.profile a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.profile a:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2c3e50;
+    padding: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .profile a {
+    color: #fff;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.search-section {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.search-section input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.video-list,
+.recommended-anime {
+    padding: 20px;
+}
+
+.video-item,
+.anime-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.video-item h3,
+.anime-item h3 {
+    margin: 5px 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f2f6;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile a {
+    color: white;
+    background: #27ae60;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.profile a:hover {
+    background: #2ecc71;
+}
+
+.search-section {
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-section input {
+    width: 90%;
+    max-width: 400px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.video-list,
+.recommended-anime {
+    padding: 20px;
+}
+
+.video-item,
+.anime-item {
+    background-color: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+}
+
+.video-item:hover,
+.anime-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.video-item h3,
+.anime-item h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.video-item a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: #3498db;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+.video-item a:hover {
+    background-color: #2980b9;
+}
+
+@media (max-width: 600px) {
+    .search-section input {
+        width: 100%;
+    }
+
+    iframe {
+        height: 180px !important;
+    }
+}
+
+.video-box {
+    background: #222;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    color: white;
+    max-width: 300px;
+}
+
+.video-box video {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.video-box button {
+    margin-right: 5px;
+    background: #00cec9;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.video-box {
+    background: #222;
+    padding: 10px;
+    border-radius: 12px;
+    color: white;
+    width: 250px;
+}
+
+.video-box video {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.video-box p {
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+.video-box button {
+    background: #00b894;
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .profile a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  
+  .profile a:hover {
+    text-decoration: underline;
+  }
+  
+  .search-section {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .search-section input {
+    padding: 10px;
+    width: 80%;
+    max-width: 500px;
+    font-size: 16px;
+  }
+  
+  .video-list {
+    padding: 20px;
+  }
+  
+  .video-item {
+    margin-bottom: 20px;
+  }
+  
+  .video-item h3 {
+    font-size: 18px;
+  }
+  
+  .video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .anime-item {
+    width: 300px;
+    text-align: center;
+  }
+  
+  .anime-item iframe {
+    width: 100%;
+    height: 200px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
