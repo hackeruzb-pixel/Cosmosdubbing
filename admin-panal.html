@@ -3,38 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cosmos Dubbing</title>
+  <title>Admin Paneli</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 1rem;
-    }
-    .video-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-    .video-item {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .video-item img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-  </style>
 </head>
 <body>
   <header>
-    <h1>Cosmos Dubbing</h1>
+    <h1 class="asd">Admin Paneli</h1>
+    <a href="index.html" class="back-button">🏠 Bosh sahifa</a>
   </header>
 
-  <section id="videoList" class="video-list">
-    <p>Yuklanmoqda...</p>
+  <section class="admin-form">
+    <input type="text" id="title" placeholder="Anime nomi" />
+    <input type="text" id="link" placeholder="Telegram video linki" />
+    <input type="text" id="image" placeholder="Anime rasmi (poster) URL" />
+    <button onclick="addAnime()">Qo‘shish</button>
   </section>
+
+  <section class="admin-videos" id="adminVideoList"></section>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -46,7 +31,7 @@
       authDomain: "cosmosdubbing.firebaseapp.com",
       databaseURL: "https://cosmosdubbing-default-rtdb.firebaseio.com",
       projectId: "cosmosdubbing",
-      storageBucket: "cosmosdubbing.appspot.com",
+      storageBucket: "cosmosdubbing.firebasestorage.app",
       messagingSenderId: "1088675177852",
       appId: "1:1088675177852:web:c0be3b73ff5994a18770f9",
       measurementId: "G-1FYXTQW6ZP"
@@ -55,36 +40,75 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function loadAnime() {
-      const container = document.getElementById("videoList");
+    // Faqat Firebase orqali anime qo‘shish
+    function addAnime() {
+      const title = document.getElementById('title').value.trim();
+      const image = document.getElementById('image').value.trim();
+      const link = document.getElementById('link').value.trim();
+
+      if (!title || !image || !link) {
+        alert("Barcha maydonlarni to‘ldiring!");
+        return;
+      }
+
+      const newAnimeRef = db.ref('anime').push();
+      newAnimeRef.set({
+        title,
+        image,
+        link
+      }).then(() => {
+        alert('✅ Anime muvaffaqiyatli qo‘shildi!');
+        document.getElementById('title').value = '';
+        document.getElementById('image').value = '';
+        document.getElementById('link').value = '';
+        loadVideos();
+      }).catch(error => {
+        alert('❌ Xatolik: ' + error.message);
+      });
+    }
+
+    function loadVideos() {
+      const container = document.getElementById("adminVideoList");
       container.innerHTML = "";
 
       db.ref("anime").once("value")
-        .then(function(snapshot) {
+        .then(snapshot => {
           const data = snapshot.val();
           if (!data) {
-            container.innerHTML = "<p>Hozircha hech qanday anime qo‘shilmagan.</p>";
+            container.innerHTML = "<p>Hech qanday anime topilmadi.</p>";
             return;
           }
 
-          Object.values(data).forEach(function(video) {
+          Object.entries(data).forEach(([key, video]) => {
             const div = document.createElement("div");
             div.className = "video-item";
-            div.innerHTML = 
-              `<img src="${video.image}" alt="${video.title}"/>
+            div.innerHTML = `
+              <img src="${video.image}" alt="${video.title}" width="100%">
               <h3>${video.title}</h3>
-              <p>${video.description || ""}</p>
-              <a href="${video.link}" target="_blank">Videoni ko‘rish</a>`
-            ;
+              <a href="${video.link}" target="_blank">Ko‘rish</a>
+              <button onclick="deleteVideo('${key}')">🗑 O‘chirish</button>
+            `;
             container.appendChild(div);
           });
-        })
-        .catch(function(error) {
-          container.innerHTML = "<p>Xatolik yuz berdi: " + error.message + "</p>";
         });
     }
 
-    document.addEventListener("DOMContentLoaded", loadAnime);
+    function deleteVideo(key) {
+      if (confirm("Aniq o‘chirmoqchimisiz?")) {
+        db.ref('anime/' + key).remove().then(() => {
+          alert("Anime o‘chirildi!");
+          loadVideos();
+        }).catch(err => {
+          alert("Xatolik: " + err.message);
+        });
+      }
+    }
+
+    if (sessionStorage.getItem("auth") !== "true") {
+      window.location.href = "admin-login.html";
+    }
+
+    window.onload = loadVideos;
   </script>
 </body>
 </html>
