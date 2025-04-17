@@ -3,94 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin Paneli</title>
+  <title>Cosmos Dubbing</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+    }
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .video-item {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .video-item img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1 class="asd">Admin Paneli</h1>
-    <a href="index.html" class="back-button">🏠 Bosh sahifa</a>
+    <h1>Cosmos Dubbing</h1>
   </header>
 
-  <section class="admin-form">
-    <input type="text" id="title" placeholder="Anime nomi" />
-    <input type="text" id="link" placeholder="Telegram video linki" />
-    <input type="text" id="img" placeholder="Anime rasmi (poster) URL" width="390" height="200" />
-    <button onclick="addVideo()">Qo‘shish</button>
+  <section id="videoList" class="video-list">
+    <p>Yuklanmoqda...</p>
   </section>
-
-  <section class="admin-videos" id="adminVideoList"></section>
-
-  <script>
-    function loadVideos() {
-      const videos = JSON.parse(localStorage.getItem("videos")) || [];
-      const container = document.getElementById("adminVideoList");
-      container.innerHTML = "";
-
-      videos.forEach((video, index) => {
-        const div = document.createElement("div");
-        div.className = "video-item";
-        div.innerHTML = `
-          <img src="${video.img}" alt="${video.title}" width="100%">
-          <h3>${video.title}</h3>
-          <div class="btn-group">
-            <button onclick="editVideo(${index})">✏️ Edit</button>
-            <button onclick="deleteVideo(${index})">🗑 O‘chirish</button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function addVideo() {
-      const title = document.getElementById("title").value.trim();
-      const link = document.getElementById("link").value.trim();
-      const img = document.getElementById("img").value.trim();
-
-      if (!title || !link || !img) return alert("Barcha maydonlarni to‘ldiring!");
-
-      const videos = JSON.parse(localStorage.getItem("videos")) || [];
-      videos.push({ title, link, img });
-      localStorage.setItem("videos", JSON.stringify(videos));
-
-      document.getElementById("title").value = "";
-      document.getElementById("link").value = "";
-      document.getElementById("img").value = "";
-
-      loadVideos();
-    }
-
-    function deleteVideo(index) {
-      const videos = JSON.parse(localStorage.getItem("videos")) || [];
-      videos.splice(index, 1);
-      localStorage.setItem("videos", JSON.stringify(videos));
-      loadVideos();
-    }
-
-    function editVideo(index) {
-      const videos = JSON.parse(localStorage.getItem("videos")) || [];
-      const updated = prompt("Yangi nom:", videos[index].title);
-      if (updated) {
-        videos[index].title = updated;
-        localStorage.setItem("videos", JSON.stringify(videos));
-        loadVideos();
-      }
-    }
-
-    if (sessionStorage.getItem("auth") !== "true") {
-      window.location.href = "admin-login.html";
-    }
-
-    window.onload = loadVideos;
-  </script>
-  
-  <!-- <h1>Anime Qo‘shish</h1>
-
-  <input type="text" id="title" placeholder="Anime nomi"><br><br>
-  <input type="text" id="image" placeholder="Rasm URL"><br><br>
-  <input type="text" id="description" placeholder="Qisqacha mazmun"><br><br>
-  <input type="text" id="link" placeholder="Ko‘rish havolasi"><br><br>
-  <button onclick="addAnime()">Qo‘shish</button> -->
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -102,7 +46,7 @@
       authDomain: "cosmosdubbing.firebaseapp.com",
       databaseURL: "https://cosmosdubbing-default-rtdb.firebaseio.com",
       projectId: "cosmosdubbing",
-      storageBucket: "cosmosdubbing.firebasestorage.app",
+      storageBucket: "cosmosdubbing.appspot.com",
       messagingSenderId: "1088675177852",
       appId: "1:1088675177852:web:c0be3b73ff5994a18770f9",
       measurementId: "G-1FYXTQW6ZP"
@@ -111,28 +55,36 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function addAnime() {
-      const title = document.getElementById('title').value;
-      const image = document.getElementById('image').value;
-      const description = document.getElementById('description').value;
-      const link = document.getElementById('link').value;
+    function loadAnime() {
+      const container = document.getElementById("videoList");
+      container.innerHTML = "";
 
-      const newAnimeRef = db.ref('anime').push();
-      newAnimeRef.set({
-        title,
-        image,
-        description,
-        link
-      }).then(() => {
-        alert('Anime muvaffaqiyatli qo‘shildi!');
-        document.getElementById('title').value = '';
-        document.getElementById('image').value = '';
-        document.getElementById('description').value = '';
-        document.getElementById('link').value = '';
-      }).catch(error => {
-        alert('Xatolik: ' + error.message);
-      });
+      db.ref("anime").once("value")
+        .then(function(snapshot) {
+          const data = snapshot.val();
+          if (!data) {
+            container.innerHTML = "<p>Hozircha hech qanday anime qo‘shilmagan.</p>";
+            return;
+          }
+
+          Object.values(data).forEach(function(video) {
+            const div = document.createElement("div");
+            div.className = "video-item";
+            div.innerHTML = 
+              `<img src="${video.image}" alt="${video.title}"/>
+              <h3>${video.title}</h3>
+              <p>${video.description || ""}</p>
+              <a href="${video.link}" target="_blank">Videoni ko‘rish</a>`
+            ;
+            container.appendChild(div);
+          });
+        })
+        .catch(function(error) {
+          container.innerHTML = "<p>Xatolik yuz berdi: " + error.message + "</p>";
+        });
     }
+
+    document.addEventListener("DOMContentLoaded", loadAnime);
   </script>
 </body>
 </html>
