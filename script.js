@@ -215,3 +215,26 @@ window.onload = function () {
     });
   }
   
+
+  const db = firebase.database();
+  const animeList = document.getElementById('anime-list');
+  
+  db.ref('anime').on('value', (snapshot) => {
+    animeList.innerHTML = '';
+    snapshot.forEach((child) => {
+      const anime = child.val();
+      const card = document.createElement('div');
+      card.className = 'anime-card';
+  
+      card.innerHTML = 
+        <div>
+          <h3>${anime.title}</h3>
+          <img src="${anime.image}" alt="${anime.title}" />
+          <p>${anime.description}</p>
+          <a href="${anime.link}" target="_blank">Ko‘rish</a>
+        </div>
+      ;
+  
+      animeList.appendChild(card);
+    });
+  });

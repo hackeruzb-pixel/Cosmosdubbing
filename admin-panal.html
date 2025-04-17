@@ -83,5 +83,56 @@
 
     window.onload = loadVideos;
   </script>
+  
+  <!-- <h1>Anime Qo‘shish</h1>
+
+  <input type="text" id="title" placeholder="Anime nomi"><br><br>
+  <input type="text" id="image" placeholder="Rasm URL"><br><br>
+  <input type="text" id="description" placeholder="Qisqacha mazmun"><br><br>
+  <input type="text" id="link" placeholder="Ko‘rish havolasi"><br><br>
+  <button onclick="addAnime()">Qo‘shish</button> -->
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBjS8OczjxZ0Cax-JfiErklZc24F3Fv0dc",
+      authDomain: "cosmosdubbing.firebaseapp.com",
+      databaseURL: "https://cosmosdubbing-default-rtdb.firebaseio.com",
+      projectId: "cosmosdubbing",
+      storageBucket: "cosmosdubbing.firebasestorage.app",
+      messagingSenderId: "1088675177852",
+      appId: "1:1088675177852:web:c0be3b73ff5994a18770f9",
+      measurementId: "G-1FYXTQW6ZP"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function addAnime() {
+      const title = document.getElementById('title').value;
+      const image = document.getElementById('image').value;
+      const description = document.getElementById('description').value;
+      const link = document.getElementById('link').value;
+
+      const newAnimeRef = db.ref('anime').push();
+      newAnimeRef.set({
+        title,
+        image,
+        description,
+        link
+      }).then(() => {
+        alert('Anime muvaffaqiyatli qo‘shildi!');
+        document.getElementById('title').value = '';
+        document.getElementById('image').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('link').value = '';
+      }).catch(error => {
+        alert('Xatolik: ' + error.message);
+      });
+    }
+  </script>
 </body>
 </html>
